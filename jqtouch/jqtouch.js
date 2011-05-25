@@ -241,7 +241,10 @@
                 // Housekeeping
                 currentPage = toPage;
                 if (goingBack) {
-                    hist.shift();
+					var howManyToGoBack = goingBack == true ? 1 : goingBack;
+					for(var i = 0; i < goingBack; i++) {
+						hist.shift();
+					}
                 } else {
                     addPageToHistory(currentPage, animation);
                 }
@@ -264,8 +267,9 @@
             _debug();
             return orientation;
         }
-        function goBack() {
+        function goBack(howMany) {
             _debug();
+			howMany = isNaN(parseInt(howMany)) ? 1 : howMany;
 
             // Error checking
             if (hist.length < 1 ) {
@@ -276,9 +280,8 @@
                 _debug('You are on the first panel.');
             }
 
-            var from = hist[0], to = hist[1];
-
-            if (doNavigation(from.page, to.page, from.animation, true)) {
+            var from = hist[0], to = hist[howMany];
+            if (doNavigation(from.page, to.page, from.animation, howMany)) {
                 return publicObj;
             } else {
                 _debug('Could not go back.');
