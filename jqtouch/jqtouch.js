@@ -134,7 +134,7 @@
 
             // Find the nearest tappable ancestor
             if (!$el.is(touchSelectors.join(', '))) {
-                var $el = $(e.target).closest(touchSelectors.join(', '));
+                $el = $(e.target).closest(touchSelectors.join(', '));
             }
 
             // Prevent default if we found an internal link (relative or absolute)
